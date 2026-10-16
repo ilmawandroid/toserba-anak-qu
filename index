@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toserba Anak QU - Pusat Mainan & Perlengkapan Anak Terlengkap</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Poppins & Montserrat -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              red: '#E52421',
+              yellow: '#FFB800',
+              blue: '#0084FF',
+              darkBlue: '#0C2340',
+              purple: '#6C5CE7',
+              grayBg: '#F7F9FC',
+              lightYellow: '#FFF8E7'
+            }
+          },
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+            heading: ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom Scrollbar for modern look */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    .badge-bounce {
+      animation: bounce 1s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+  </style>
+</head>
+<body class="bg-brand-grayBg text-slate-800 font-sans antialiased flex flex-col min-h-screen">
+
+  <!-- TOP ANNOUNCEMENT BAR -->
+  <div class="bg-brand-red text-white text-xs md:text-sm py-2 px-4 text-center font-medium shadow-inner flex justify-between items-center px-6">
+    <div class="hidden sm:block text-xs text-red-100">
+      <i class="fa-solid fa-headset mr-1"></i> CS Hotline: 0800-123-QUANAK (78262)
+    </div>
+    <div class="mx-auto sm:mx-0 flex items-center space-x-2">
+      <span class="bg-yellow-400 text-slate-900 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Promo Spesial</span>
+      <span>Gratis Ongkir Seluruh Indonesia min. belanja Rp 300.000! 🎁</span>
+    </div>
+    <div class="hidden sm:flex space-x-4 text-xs text-red-100">
+      <a href="#" class="hover:underline">Lacak Pesanan</a>
+      <span>|</span>
+      <a href="#" class="hover:underline">Lokasi Toko</a>
+    </div>
+  </div>
+
+  <!-- MAIN HEADER -->
+  <header class="bg-white sticky top-0 z-40 shadow-sm border-b border-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
+      
+      <!-- LOGO -->
+      <a href="#" class="flex items-center gap-2 group flex-shrink-0">
+        <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-tr from-brand-red to-brand-yellow rounded-2xl flex items-center justify-center text-white text-xl md:text-2xl font-black shadow-md group-hover:scale-105 transition-transform">
+          QU
+        </div>
+        <div class="flex flex-col">
+          <span class="font-heading font-extrabold text-xl md:text-2xl text-brand-darkBlue tracking-tight leading-none">
+            Toserba Anak <span class="text-brand-red">QU</span>
+          </span>
+          <span class="text-[10px] text-slate-400 font-semibold tracking-wider uppercase">Dunia Mainan & Ceria</span>
+        </div>
+      </a>
+
+      <!-- SEARCH BAR WITH LIVE RESULTS -->
+      <div class="relative flex-1 max-w-2xl hidden md:block">
+        <div class="relative">
+          <input type="text" id="searchInput" onkeyup="handleSearch()" placeholder="Cari LEGO, Barbie, Nerf, Hot Wheels, atau tas sekolah..." 
+                 class="w-full bg-slate-50 border border-slate-200 rounded-full py-2.5 pl-11 pr-24 text-sm focus:outline-none focus:border-brand-blue focus:bg-white focus:ring-2 focus:ring-blue-100 transition-all">
+          <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-slate-400"></i>
+          <button class="absolute right-1.5 top-1 bg-brand-blue text-white px-5 py-1.5 rounded-full text-sm font-medium hover:bg-blue-600 transition-colors shadow-sm">
+            Cari
+          </button>
+        </div>
+        
+        <!-- Live Search Dropdown -->
+        <div id="searchDropdown" class="hidden absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-xl border border-slate-100 z-50 max-h-80 overflow-y-auto">
+          <!-- Dynamic Content by JS -->
+        </div>
+      </div>
+
+      <!-- HEADER ACTIONS -->
+      <div class="flex items-center gap-3 md:gap-5">
+        <!-- Search icon for mobile -->
+        <button class="md:hidden text-slate-600 text-xl p-2 hover:text-brand-blue">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+        <!-- User Account -->
+        <button class="flex items-center gap-2 text-slate-700 hover:text-brand-blue transition-colors p-1">
+          <div class="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-600">
+            <i class="fa-regular fa-user"></i>
+          </div>
+          <div class="hidden lg:flex flex-col text-left">
+            <span class="text-xs text-slate-400">Selamat datang,</span>
+            <span class="text-xs font-bold text-slate-800">Masuk / Daftar</span>
+          </div>
+        </button>
+
+        <!-- Wishlist -->
+        <a href="#" class="relative p-2 text-slate-600 hover:text-brand-red transition-colors hidden sm:block">
+          <i class="fa-regular fa-heart text-xl"></i>
+          <span class="absolute top-1 right-1 bg-brand-yellow text-slate-900 text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">3</span>
+        </a>
+
+        <!-- Cart Button -->
+        <button onclick="toggleCart()" class="relative flex items-center gap-2 bg-slate-900 text-white px-4 py-2.5 rounded-full hover:bg-brand-red transition-all shadow-sm">
+          <i class="fa-solid fa-basket-shopping text-lg text-brand-yellow"></i>
+          <span class="text-xs font-bold hidden sm:inline">Keranjang</span>
+          <span id="cartCount" class="bg-brand-red text-white text-xs font-bold px-2 py-0.5 rounded-full">0</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- NAVIGATION MENU -->
+    <nav class="bg-white border-t border-slate-100 hidden md:block">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between text-sm font-semibold">
+        <ul class="flex items-center space-x-1 lg:space-x-6 py-2.5 overflow-x-auto">
+          <li><a href="#katalog" onclick="filterCategory('All')" class="px-3 py-1.5 rounded-md hover:bg-slate-100 text-brand-red font-bold flex items-center gap-1.5"><i class="fa-solid fa-border-all text-xs"></i> Semua Produk</a></li>
+          <li><a href="#katalog" onclick="filterCategory('Mainan')" class="px-3 py-1.5 rounded-md hover:bg-slate-100 text-slate-700">Mainan & Edukasi</a></li>
+          <li><a href="#katalog" onclick="filterCategory('Game')" class="px-3 py-1.5 rounded-md hover:bg-slate-100 text-slate-700">Board Games</a></li>
+          <li><a href="#katalog" onclick="filterCategory('Boneka & Figur')" class="px-3 py-1.5 rounded-md hover:bg-slate-100 text-slate-700">Boneka & Action Figure</a></li>
+          <li><a href="#katalog" onclick="filterCategory('Video Games')" class="px-3 py-1.5 rounded-md hover:bg-slate-100 text-slate-700">Console & Video Games</a></li>
+          <li><a href="#katalog" onclick="filterCategory('Pakaian & Aksesori')" class="px-3 py-1.5 rounded-md hover:bg-slate-100 text-slate-700">Pakaian Anak</a></li>
+          <li><a href="#katalog" onclick="filterCategory('Sekolah')" class="px-3 py-1.5 rounded-md hover:bg-slate-100 text-slate-700">Perlengkapan Sekolah</a></li>
+        </ul>
+        <div class="flex items-center text-xs font-bold text-brand-purple bg-purple-50 px-3 py-1.5 rounded-full flex-shrink-0">
+          <i class="fa-solid fa-fire mr-1 text-brand-red"></i> FLASH SALE 50%
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO CAROUSEL BANNER -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 md:mt-6">
+    <div class="relative bg-gradient-to-r from-brand-darkBlue via-indigo-900 to-blue-900 rounded-3xl overflow-hidden shadow-xl text-white min-h-[280px] md:min-h-[360px] flex items-center">
+      
+      <!-- Slide Content -->
+      <div id="heroSlide" class="p-8 md:p-14 max-w-xl z-10 transition-opacity duration-500">
+        <span class="inline-block bg-brand-yellow text-slate-900 text-xs font-black uppercase px-3 py-1 rounded-full mb-3 tracking-wide">
+          MEGA PROMO BULAN INI
+        </span>
+        <h1 class="font-heading text-2xl md:text-5xl font-extrabold leading-tight mb-3">
+          Koleksi Mainan <span class="text-brand-yellow">Eksklusif</span> Anak QU!
+        </h1>
+        <p class="text-slate-300 text-xs md:text-base mb-6">
+          Diskon hingga 40% untuk produk LEGO, Barbie, Nerf, dan Marvel Action Figures. Stok terbatas!
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a href="#katalog" class="bg-brand-red hover:bg-red-600 text-white font-bold px-6 py-3 rounded-full text-sm shadow-lg hover:shadow-red-500/30 transition-all flex items-center gap-2">
+            Belanja Sekarang <i class="fa-solid fa-arrow-right text-xs"></i>
+          </a>
+          <a href="#kategori" class="bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm border border-white/20 font-semibold px-6 py-3 rounded-full text-sm transition-all">
+            Lihat Kategori
+          </a>
+        </div>
+      </div>
+
+      <!-- Decorative Graphic & Image overlay -->
+      <div class="absolute right-0 top-0 bottom-0 w-1/2 hidden md:block overflow-hidden">
+        <div class="w-full h-full bg-[url('https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-80 mix-blend-overlay"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-brand-darkBlue via-transparent to-transparent"></div>
+      </div>
+
+      <!-- Floating Badge -->
+      <div class="absolute bottom-6 right-6 bg-white/90 backdrop-blur-md text-slate-800 p-3 rounded-2xl shadow-lg border border-white/50 hidden sm:flex items-center gap-3">
+        <div class="w-10 h-10 bg-brand-yellow rounded-xl flex items-center justify-center text-slate-900 text-lg font-bold">
+          <i class="fa-solid fa-percent"></i>
+        </div>
+        <div class="text-left">
+          <p class="text-xs font-bold">Cashback Hingga 50rb</p>
+          <p class="text-[10px] text-slate-500">Gunakan Kode: <span class="font-bold text-brand-red">QUCERIA</span></p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FEATURES BAR -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8">
+    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 grid grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-blue-50 text-brand-blue flex items-center justify-center text-2xl flex-shrink-0">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm text-slate-800">100% Original</h4>
+          <p class="text-xs text-slate-500">Produk resmi bergaransi</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-green-50 text-emerald-600 flex items-center justify-center text-2xl flex-shrink-0">
+          <i class="fa-solid fa-truck-fast"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm text-slate-800">Pengiriman Cepat</h4>
+          <p class="text-xs text-slate-500">Same-Day Instan Delivery</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-yellow-50 text-amber-600 flex items-center justify-center text-2xl flex-shrink-0">
+          <i class="fa-solid fa-rotate-left"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm text-slate-800">Garansi Retur 14 Hari</h4>
+          <p class="text-xs text-slate-500">Pengembalian mudah & cepat</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-purple-50 text-brand-purple flex items-center justify-center text-2xl flex-shrink-0">
+          <i class="fa-solid fa-lock"></i>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm text-slate-800">Pembayaran Aman</h4>
+          <p class="text-xs text-slate-500">Bisa COD & Transfer Bank</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KATEGORI UTAMA -->
+  <section id="kategori" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10">
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <h2 class="font-heading text-xl md:text-2xl font-extrabold text-slate-800">Kategori Pilihan</h2>
+        <p class="text-xs md:text-sm text-slate-500">Temukan dunia keceriaan sesuai kebutuhan buah hati Anda</p>
+      </div>
+      <a href="#katalog" class="text-xs md:text-sm font-bold text-brand-blue hover:text-blue-700 flex items-center gap-1">
+        Lihat Semua <i class="fa-solid fa-chevron-right text-xs"></i>
+      </a>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+      
+      <!-- Kat 1 -->
+      <button onclick="filterCategory('Mainan')" class="group bg-white p-4 rounded-2xl border border-slate-100 hover:border-brand-blue shadow-sm hover:shadow-md transition-all text-center flex flex-col items-center">
+        <div class="w-16 h-16 bg-red-50 text-brand-red rounded-2xl flex items-center justify-center text-3xl mb-3 group-hover:scale-110 transition-transform">
+          🧱
+        </div>
+        <span class="font-bold text-xs md:text-sm text-slate-800 group-hover:text-brand-blue">Mainan & Blok</span>
+        <span class="text-[10px] text-slate-400 mt-1">240+ Produk</span>
+      </button>
+
+      <!-- Kat 2 -->
+      <button onclick="filterCategory('Game')" class="group bg-white p-4 rounded-2xl border border-slate-100 hover:border-brand-blue shadow-sm hover:shadow-md transition-all text-center flex flex-col items-center">
+        <div class="w-16 h-16 bg-yellow-50 text-amber-600 rounded-2xl flex items-center justify-center text-3xl mb-3 group-hover:scale-110 transition-transform">
+          🎲
+        </div>
+        <span class="font-bold text-xs md:text-sm text-slate-800 group-hover:text-brand-blue">Board Games</span>
+        <span class="text-[10px] text-slate-400 mt-1">85+ Produk</span>
+      </button>
+
+      <!-- Kat 3 -->
+      <button onclick="filterCategory('Boneka & Figur')" class="group bg-white p-4 rounded-2xl border border-slate-100 hover:border-brand-blue shadow-sm hover:shadow-md transition-all text-center flex flex-col items-center">
+        <div class="w-16 h-16 bg-pink-50 text-pink-600 rounded-2xl flex items-center justify-center text-3xl mb-3 group-hover:scale-110 transition-transform">
+          🧸
+        </div>
+        <span class="font-bold text-xs md:text-sm text-slate-800 group-hover:text-brand-blue">Boneka & Figur</span>
+        <span class="text-[10px] text-slate-400 mt-1">190+ Produk</span>
+      </button>
+
+      <!-- Kat 4 -->
+      <button onclick="filterCategory('Video Games')" class="group bg-white p-4 rounded-2xl border border-slate-100 hover:border-brand-blue shadow-sm hover:shadow-md transition-all text-center flex flex-col items-center">
+        <div class="w-16 h-16 bg-blue-50 text-brand-blue rounded-2xl flex items-center justify-center text-3xl mb-3 group-hover:scale-110 transition-transform">
+          🎮
+        </div>
+        <span class="font-bold text-xs md:text-sm text-slate-800 group-hover:text-brand-blue">Video Games</span>
+        <span class="text-[10px] text-slate-400 mt-1">110+ Produk</span>
+      </button>
+
+      <!-- Kat 5 -->
+      <button onclick="filterCategory('Pakaian & Aksesori')" class="group bg-white p-4 rounded-2xl border border-slate-100 hover:border-brand-blue shadow-sm hover:shadow-md transition-all text-center flex flex-col items-center">
+        <div class="w-16 h-16 bg-purple-50 text-brand-purple rounded-2xl flex items-center justify-center text-3xl mb-3 group-hover:scale-110 transition-transform">
+          👕
+        </div>
+        <span class="font-bold text-xs md:text-sm text-slate-800 group-hover:text-brand-blue">Pakaian Anak</span>
+        <span class="text-[10px] text-slate-400 mt-1">310+ Produk</span>
+      </button>
+
+      <!-- Kat 6 -->
+      <button onclick="filterCategory('Sekolah')" class="group bg-white p-4 rounded-2xl border border-slate-100 hover:border-brand-blue shadow-sm hover:shadow-md transition-all text-center flex flex-col items-center">
+        <div class="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center text-3xl mb-3 group-hover:scale-110 transition-transform">
+          🎒
+        </div>
+        <span class="font-bold text-xs md:text-sm text-slate-800 group-hover:text-brand-blue">Perlengkapan Sekolah</span>
+        <span class="text-[10px] text-slate-400 mt-1">150+ Produk</span>
+      </button>
+
+    </div>
+  </section>
+
+  <!-- KATALOG PRODUK REKOMENDASI -->
+  <section id="katalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 flex-1">
+    
+    <!-- Filter & Sort Bar -->
+    <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 mb-6 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0 w-full sm:w-auto">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mr-2">Kategori:</span>
+        <button id="btnCatAll" onclick="filterCategory('All')" class="px-4 py-1.5 rounded-full text-xs font-bold bg-brand-darkBlue text-white shadow-sm">
+          Semua
+        </button>
+        <button id="btnCatMainan" onclick="filterCategory('Mainan')" class="px-4 py-1.5 rounded-full text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200">
+          Mainan
+        </button>
+        <button id="btnCatGame" onclick="filterCategory('Game')" class="px-4 py-1.5 rounded-full text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200">
+          Game
+        </button>
+        <button id="btnCatBoneka" onclick="filterCategory('Boneka & Figur')" class="px-4 py-1.5 rounded-full text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200">
+          Boneka & Figur
+        </button>
+        <button id="btnCatConsole" onclick="filterCategory('Video Games')" class="px-4 py-1.5 rounded-full text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200">
+          Video Games
+        </button>
+        <button id="btnCatSekolah" onclick="filterCategory('Sekolah')" class="px-4 py-1.5 rounded-full text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200">
+          Sekolah
+        </button>
+      </div>
+
+      <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
+        <span class="text-xs text-slate-500 font-medium" id="productCountText">Menampilkan 8 Produk</span>
+        <select id="sortSelect" onchange="sortProducts()" class="bg-slate-50 border border-slate-200 rounded-lg text-xs font-medium px-3 py-1.5 focus:outline-none focus:border-brand-blue">
+          <option value="populer">Paling Populer</option>
+          <option value="low">Harga: Rendah ke Tinggi</option>
+          <option value="high">Harga: Tinggi ke Rendah</option>
+          <option value="rating">Rating Tertinggi</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- PRODUCT GRID -->
+    <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+      <!-- Dynamic Products injected via JavaScript -->
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 text-slate-300 mt-16 pt-12 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+        
+        <!-- Col 1: About -->
+        <div class="lg:col-span-2">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-9 h-9 bg-brand-red rounded-xl flex items-center justify-center text-white font-black text-xl">QU</div>
+            <span class="font-heading font-extrabold text-xl text-white">Toserba Anak QU</span>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed mb-6 max-w-sm">
+            Toserba Anak QU adalah pusat belanja terlengkap untuk mainan edukasi, boneka, video games, dan kebutuhan sekolah anak terlengkap di Indonesia. Selalu menghadirkan produk original berkualitas terbaik demi tawa dan tumbuh kembang buah hati.
+          </p>
+          <div class="flex space-x-3">
+            <a href="#" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-brand-red text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-brand-blue text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-red-600 text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" class="w-9 h-9 rounded-full bg-slate-800 hover:bg-emerald-500 text-white flex items-center justify-center transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <!-- Col 2: Kategori -->
+        <div>
+          <h4 class="text-sm font-bold text-white mb-4 uppercase tracking-wider">Kategori</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#" class="hover:text-white transition-colors">Mainan Konstruksi (LEGO)</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Action Figures & Koleksi</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Boneka & Rumah Mainan</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Console Video Games</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Perlengkapan Sekolah & Tas</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Pakaian & Aksesori Anak</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Layanan Pelanggan -->
+        <div>
+          <h4 class="text-sm font-bold text-white mb-4 uppercase tracking-wider">Bantuan & Layanan</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#" class="hover:text-white transition-colors">Status Pesanan</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Cara Pengembalian Barang</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Panduan Ukuran Pakaian</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Syarat & Ketentuan Promo</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Kebijakan Privasi</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Hubungi Kami (CS)</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Newsletter -->
+        <div>
+          <h4 class="text-sm font-bold text-white mb-4 uppercase tracking-wider">Berlangganan Promo</h4>
+          <p class="text-xs text-slate-400 mb-3">Dapatkan voucher potongan Rp 25.000 untuk pendaftaran pertama!</p>
+          <form onsubmit="event.preventDefault(); alert('Terima kasih telah berlangganan newsletter Toserba Anak QU!');" class="space-y-2">
+            <input type="email" placeholder="Email Anda..." required class="w-full bg-slate-800 border border-slate-700 text-xs rounded-lg px-3 py-2 text-white focus:outline-none focus:border-brand-blue">
+            <button type="submit" class="w-full bg-brand-red hover:bg-red-600 text-white font-bold text-xs py-2 rounded-lg transition-colors">
+              Daftar Newsletter
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Payment & Security Badges -->
+      <div class="border-t border-slate-800 pt-6 pb-4 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <div>
+          <p>© 2026 Toserba Anak QU. Hak Cipta Dilindungi Undang-Undang.</p>
+        </div>
+        <div class="flex flex-wrap gap-3 items-center text-lg">
+          <span class="text-xs font-semibold mr-1">Metode Pembayaran:</span>
+          <i class="fa-brands fa-cc-visa text-slate-400"></i>
+          <i class="fa-brands fa-cc-mastercard text-slate-400"></i>
+          <span class="bg-slate-800 text-[10px] px-2 py-0.5 rounded text-slate-300 font-bold">QRIS</span>
+          <span class="bg-slate-800 text-[10px] px-2 py-0.5 rounded text-slate-300 font-bold">GOPAY</span>
+          <span class="bg-slate-800 text-[10px] px-2 py-0.5 rounded text-slate-300 font-bold">BCA</span>
+          <span class="bg-slate-800 text-[10px] px-2 py-0.5 rounded text-slate-300 font-bold">MANDIRI</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CART DRAWER / SLIDE-OVER -->
+  <div id="cartDrawer" class="fixed inset-0 z-50 overflow-hidden pointer-events-none transition-opacity duration-300 opacity-0">
+    <!-- Backdrop -->
+    <div id="cartBackdrop" onclick="toggleCart()" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"></div>
+
+    <div class="fixed inset-y-0 right-0 max-w-full flex pl-10 pointer-events-auto">
+      <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col">
+        
+        <!-- Cart Header -->
+        <div class="p-4 bg-slate-900 text-white flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-basket-shopping text-brand-yellow"></i>
+            <h3 class="font-bold text-base">Keranjang Belanja QU</h3>
+          </div>
+          <button onclick="toggleCart()" class="text-slate-400 hover:text-white text-xl p-1">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- Free Shipping Progress -->
+        <div class="bg-brand-lightYellow p-3 border-b border-amber-100 flex items-center gap-3">
+          <i class="fa-solid fa-truck-ramp-box text-amber-600 text-lg"></i>
+          <div class="flex-1 text-xs">
+            <span id="freeShipText" class="font-semibold text-amber-900">Belanja Rp 300.000 lagi untuk GRATIS ONGKIR!</span>
+            <div class="w-full bg-amber-200 h-1.5 rounded-full mt-1 overflow-hidden">
+              <div id="freeShipBar" class="bg-brand-red h-full transition-all duration-300" style="width: 20%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cart Items List -->
+        <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-4 divide-y divide-slate-100">
+          <!-- Injected by JS -->
+        </div>
+
+        <!-- Cart Footer -->
+        <div class="p-4 border-t border-slate-100 bg-slate-50 space-y-3">
+          <div class="flex justify-between text-xs text-slate-500">
+            <span>Subtotal Produk</span>
+            <span id="cartSubtotal" class="font-bold text-slate-800">Rp 0</span>
+          </div>
+          <div class="flex justify-between text-xs text-slate-500">
+            <span>Estimasi Ongkir</span>
+            <span id="cartOngkir" class="font-bold text-emerald-600">Rp 0</span>
+          </div>
+          <div class="flex justify-between text-base font-extrabold text-slate-900 pt-2 border-t border-slate-200">
+            <span>Total Bayar</span>
+            <span id="cartTotal" class="text-brand-red">Rp 0</span>
+          </div>
+
+          <button onclick="checkout()" class="w-full bg-brand-red hover:bg-red-600 text-white font-bold py-3 rounded-xl text-sm shadow-md transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-credit-card"></i> Lanjut Ke Pembayaran
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCT DETAIL MODAL (QUICK VIEW) -->
+  <div id="productModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm hidden">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative">
+      <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-9 h-9 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full flex items-center justify-center text-lg">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-6" id="modalContent">
+        <!-- Dynamic Content injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // DATA KATALOG PRODUK TOSERBA ANAK QU
+    const products = [
+      {
+        id: 1,
+        title: "LEGO City Police Station Playset",
+        category: "Mainan",
+        price: 899000,
+        originalPrice: 1199000,
+        discount: "25%",
+        rating: 4.9,
+        reviews: 42,
+        image: "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?q=80&w=600&auto=format&fit=crop",
+        badge: "BEST SELLER",
+        stock: 12,
+        desc: "Set stasiun polisi LEGO City lengkap dengan 3 lantai, mobil patroli, helikopter, dan 5 karakter minifigur untuk imajinasi tanpa batas."
+      },
+      {
+        id: 2,
+        title: "Barbie Dreamhouse Playset Modern",
+        category: "Boneka & Figur",
+        price: 1499000,
+        originalPrice: 1899000,
+        discount: "21%",
+        rating: 4.8,
+        reviews: 38,
+        image: "https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?q=80&w=600&auto=format&fit=crop",
+        badge: "TERLARIS",
+        stock: 5,
+        desc: "Rumah impian Barbie dengan 3 lantai, perosotan air, efek suara & lampu interaktif. Cocok untuk usia 3 tahun ke atas."
+      },
+      {
+        id: 3,
+        title: "Monopoly Junior Board Game Indonesia",
+        category: "Game",
+        price: 249000,
+        originalPrice: 299000,
+        discount: "16%",
+        rating: 4.7,
+        reviews: 89,
+        image: "https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?q=80&w=600&auto=format&fit=crop",
+        badge: "HOT ITEM",
+        stock: 20,
+        desc: "Permainan papan monopoli khusus anak-anak untuk mengasah kemampuan finansial awal dengan aturan yang simpel dan menyenangkan."
+      },
+      {
+        id: 4,
+        title: "Nintendo Switch OLED Model Mario Edition",
+        category: "Video Games",
+        price: 4599000,
+        originalPrice: 5200000,
+        discount: "11%",
+        rating: 5.0,
+        reviews: 115,
+        image: "https://images.unsplash.com/photo-1578303512597-81e6cc155b3e?q=80&w=600&auto=format&fit=crop",
+        badge: "PROMO EXCLUSIVE",
+        stock: 3,
+        desc: "Konsol game impian anak & keluarga dengan layar OLED 7-inci cerah, warna edisi khusus Mario Red, dan memori internal 64GB."
+      },
+      {
+        id: 5,
+        title: "Tas Ransel Anak Ergonomis Avengers",
+        category: "Sekolah",
+        price: 329000,
+        originalPrice: 450000,
+        discount: "26%",
+        rating: 4.8,
+        reviews: 54,
+        image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=600&auto=format&fit=crop",
+        badge: "BACK TO SCHOOL",
+        stock: 18,
+        desc: "Tas sekolah tahan air dengan bantalan punggung ergonomis untuk merawat postur tubuh anak saat membawa buku sekolah."
+      },
+      {
+        id: 6,
+        title: "Hot Wheels Track Builder Unlimited Loop",
+        category: "Mainan",
+        price: 399000,
+        originalPrice: 499000,
+        discount: "20%",
+        rating: 4.9,
+        reviews: 67,
+        image: "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?q=80&w=600&auto=format&fit=crop",
+        badge: "POPULER",
+        stock: 9,
+        desc: "Lintasan Hot Wheels dengan tantangan loop raksasa yang dapat disesuaikan dan dihubungkan dengan set lintasan Hot Wheels lainnya."
+      },
+      {
+        id: 7,
+        title: "Pakaian Setelan Piyama Anak Organic Cotton",
+        category: "Pakaian & Aksesori",
+        price: 189000,
+        originalPrice: 220000,
+        discount: "14%",
+        rating: 4.6,
+        reviews: 31,
+        image: "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?q=80&w=600&auto=format&fit=crop",
+        badge: "DISCOUNT",
+        stock: 25,
+        desc: "Setelan baju tidur anak berbahan 100% katun organik yang lembut, adem, dan aman untuk kulit sensitif anak."
+      },
+      {
+        id: 8,
+        title: "Marvel Spider-Man Titan Hero Action Figure",
+        category: "Boneka & Figur",
+        price: 219000,
+        originalPrice: 279000,
+        discount: "21%",
+        rating: 4.9,
+        reviews: 98,
+        image: "https://images.unsplash.com/photo-1608889825205-eebdb9fc5806?q=80&w=600&auto=format&fit=crop",
+        badge: "BARU",
+        stock: 15,
+        desc: "Action figure Spider-Man tinggi 30cm dengan artikulasi tangan & kaki yang dapat digerakkan untuk pose bertarung keren."
+      }
+    ];
+
+    // STATE KERANJANG
+    let cart = [];
+    let currentCategory = 'All';
+
+    // RENDER CATALOG PRODUCTS
+    function renderProducts(items) {
+      const grid = document.getElementById('productGrid');
+      document.getElementById('productCountText').innerText = `Menampilkan ${items.length} Produk`;
+
+      if (items.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full text-center py-12 bg-white rounded-2xl border border-slate-100">
+            <div class="text-4xl mb-3">🔍</div>
+            <h3 class="font-bold text-slate-800 text-base">Produk tidak ditemukan</h3>
+            <p class="text-xs text-slate-500">Coba kata kunci atau kategori filter yang lain.</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = items.map(p => `
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group">
+          <!-- Image Box -->
+          <div class="relative overflow-hidden aspect-square bg-slate-50">
+            <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            
+            <!-- Discount Badge -->
+            <span class="absolute top-3 left-3 bg-brand-red text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full shadow-md">
+              -${p.discount}
+            </span>
+            
+            <span class="absolute top-3 right-3 bg-slate-900/80 backdrop-blur-sm text-yellow-400 text-[10px] font-bold px-2 py-0.5 rounded-md">
+              ${p.badge}
+            </span>
+
+            <!-- Quick View Button -->
+            <button onclick="openModal(${p.id})" class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-md text-slate-800 text-xs font-bold px-4 py-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-md hover:bg-brand-blue hover:text-white">
+              <i class="fa-solid fa-eye mr-1"></i> Quick View
+            </button>
+          </div>
+
+          <!-- Product Info -->
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-bold text-brand-blue uppercase tracking-wider">${p.category}</span>
+              <h3 class="font-bold text-xs md:text-sm text-slate-800 line-clamp-2 mt-1 mb-2 hover:text-brand-blue transition-colors cursor-pointer" onclick="openModal(${p.id})">
+                ${p.title}
+              </h3>
+            </div>
+
+            <div>
+              <!-- Rating & Stock -->
+              <div class="flex items-center justify-between text-[11px] mb-2">
+                <div class="flex items-center text-amber-400 font-bold">
+                  <i class="fa-solid fa-star mr-1"></i> ${p.rating} <span class="text-slate-400 font-normal ml-1">(${p.reviews})</span>
+                </div>
+                <span class="text-slate-400 font-medium">Stok: <b class="text-slate-700">${p.stock}</b></span>
+              </div>
+
+              <!-- Pricing -->
+              <div class="flex items-baseline gap-2 mb-3">
+                <span class="font-extrabold text-sm md:text-base text-brand-red">
+                  Rp ${p.price.toLocaleString('id-ID')}
+                </span>
+                <span class="text-[11px] text-slate-400 line-through">
+                  Rp ${p.originalPrice.toLocaleString('id-ID')}
+                </span>
+              </div>
+
+              <!-- Add to Cart Button -->
+              <button onclick="addToCart(${p.id})" class="w-full bg-slate-100 hover:bg-brand-blue hover:text-white text-slate-800 font-bold py-2 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
+                <i class="fa-solid fa-plus text-[10px]"></i> Tambah Ke Keranjang
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // FILTER CATEGORY
+    function filterCategory(category) {
+      currentCategory = category;
+      let filtered = products;
+      if (category !== 'All') {
+        filtered = products.filter(p => p.category === category);
+      }
+      renderProducts(filtered);
+    }
+
+    // SORT PRODUCTS
+    function sortProducts() {
+      const val = document.getElementById('sortSelect').value;
+      let items = [...products];
+
+      if (currentCategory !== 'All') {
+        items = items.filter(p => p.category === currentCategory);
+      }
+
+      if (val === 'low') {
+        items.sort((a,b) => a.price - b.price);
+      } else if (val === 'high') {
+        items.sort((a,b) => b.price - a.price);
+      } else if (val === 'rating') {
+        items.sort((a,b) => b.rating - a.rating);
+      }
+      renderProducts(items);
+    }
+
+    // LIVE SEARCH
+    function handleSearch() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      const dropdown = document.getElementById('searchDropdown');
+
+      if (query.length === 0) {
+        dropdown.classList.add('hidden');
+        renderProducts(products);
+        return;
+      }
+
+      const results = products.filter(p => 
+        p.title.toLowerCase().includes(query) || p.category.toLowerCase().includes(query)
+      );
+
+      // Render search dropdown list
+      if (results.length > 0) {
+        dropdown.innerHTML = results.map(p => `
+          <div onclick="openModal(${p.id}); document.getElementById('searchDropdown').classList.add('hidden')" class="p-3 hover:bg-slate-50 border-b border-slate-50 flex items-center gap-3 cursor-pointer">
+            <img src="${p.image}" class="w-10 h-10 object-cover rounded-lg">
+            <div class="flex-1">
+              <h4 class="text-xs font-bold text-slate-800">${p.title}</h4>
+              <p class="text-[10px] text-brand-red font-bold">Rp ${p.price.toLocaleString('id-ID')}</p>
+            </div>
+            <span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded">${p.category}</span>
+          </div>
+        `).join('');
+        dropdown.classList.remove('hidden');
+      } else {
+        dropdown.innerHTML = `<div class="p-4 text-xs text-slate-400 text-center">Tidak ada produk cocok dengan "${query}"</div>`;
+        dropdown.classList.remove('hidden');
+      }
+
+      renderProducts(results);
+    }
+
+    // CART MANAGEMENT LOGIC
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      const existing = cart.find(item => item.id === productId);
+
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ ...product, qty: 1 });
+      }
+
+      updateCartUI();
+      toggleCart(true); // Auto open cart
+    }
+
+    function updateQty(productId, change) {
+      const item = cart.find(i => i.id === productId);
+      if (item) {
+        item.qty += change;
+        if (item.qty <= 0) {
+          cart = cart.filter(i => i.id !== productId);
+        }
+      }
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const container = document.getElementById('cartItemsContainer');
+      const countBadge = document.getElementById('cartCount');
+      
+      const totalQty = cart.reduce((acc, item) => acc + item.qty, 0);
+      const subtotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+      
+      countBadge.innerText = totalQty;
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-16 text-slate-400">
+            <i class="fa-solid fa-basket-shopping text-5xl mb-3 text-slate-200"></i>
+            <p class="font-bold text-sm text-slate-700">Keranjang Belanja Kosong</p>
+            <p class="text-xs text-slate-400 mt-1">Yuk pilih mainan dan perlengkapan anak favoritmu!</p>
+          </div>
+        `;
+      } else {
+        container.innerHTML = cart.map(item => `
+          <div class="py-3 flex items-center gap-3">
+            <img src="${item.image}" class="w-14 h-14 object-cover rounded-xl border border-slate-100">
+            <div class="flex-1">
+              <h4 class="text-xs font-bold text-slate-800 line-clamp-1">${item.title}</h4>
+              <p class="text-xs font-extrabold text-brand-red mt-0.5">Rp ${(item.price * item.qty).toLocaleString('id-ID')}</p>
+              
+              <div class="flex items-center gap-2 mt-2">
+                <button onclick="updateQty(${item.id}, -1)" class="w-6 h-6 bg-slate-100 text-slate-600 rounded-md text-xs font-bold hover:bg-slate-200">-</button>
+                <span class="text-xs font-bold">${item.qty}</span>
+                <button onclick="updateQty(${item.id}, 1)" class="w-6 h-6 bg-slate-100 text-slate-600 rounded-md text-xs font-bold hover:bg-slate-200">+</button>
+              </div>
+            </div>
+            <button onclick="updateQty(${item.id}, -${item.qty})" class="text-slate-300 hover:text-brand-red text-sm p-2">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        `).join('');
+      }
+
+      // Calculations
+      document.getElementById('cartSubtotal').innerText = `Rp ${subtotal.toLocaleString('id-ID')}`;
+      
+      // Free Shipping Calculator (min 300rb)
+      const targetFreeShip = 300000;
+      const progress = Math.min((subtotal / targetFreeShip) * 100, 100);
+      document.getElementById('freeShipBar').style.width = `${progress}%`;
+
+      if (subtotal >= targetFreeShip) {
+        document.getElementById('freeShipText').innerHTML = `<span class="text-emerald-700 font-bold">🎉 Selamat! Anda mendapatkan GRATIS ONGKIR!</span>`;
+        document.getElementById('cartOngkir').innerText = "GRATIS";
+        document.getElementById('cartTotal').innerText = `Rp ${subtotal.toLocaleString('id-ID')}`;
+      } else {
+        const sisa = targetFreeShip - subtotal;
+        const ongkir = subtotal > 0 ? 20000 : 0;
+        document.getElementById('freeShipText').innerText = `Belanja Rp ${sisa.toLocaleString('id-ID')} lagi untuk GRATIS ONGKIR!`;
+        document.getElementById('cartOngkir').innerText = subtotal > 0 ? `Rp ${ongkir.toLocaleString('id-ID')}` : "Rp 0";
+        document.getElementById('cartTotal').innerText = `Rp ${(subtotal + ongkir).toLocaleString('id-ID')}`;
+      }
+    }
+
+    // TOGGLE CART DRAWER
+    function toggleCart(openExplicitly = false) {
+      const drawer = document.getElementById('cartDrawer');
+      if (openExplicitly || drawer.classList.contains('pointer-events-none')) {
+        drawer.classList.remove('pointer-events-none', 'opacity-0');
+        drawer.classList.add('opacity-100');
+      } else {
+        drawer.classList.add('pointer-events-none', 'opacity-0');
+        drawer.classList.remove('opacity-100');
+      }
+    }
+
+    // PRODUCT MODAL (QUICK VIEW)
+    function openModal(id) {
+      const p = products.find(item => item.id === id);
+      const modal = document.getElementById('productModal');
+      const content = document.getElementById('modalContent');
+
+      content.innerHTML = `
+        <div class="aspect-square bg-slate-50 rounded-2xl overflow-hidden relative">
+          <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover">
+          <span class="absolute top-3 left-3 bg-brand-red text-white text-xs font-extrabold px-3 py-1 rounded-full">
+            Diskon ${p.discount}
+          </span>
+        </div>
+
+        <div class="flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-bold text-brand-blue uppercase">${p.category}</span>
+            <h2 class="font-heading font-extrabold text-lg md:text-xl text-slate-800 mt-1">${p.title}</h2>
+            
+            <div class="flex items-center gap-2 my-3 text-xs">
+              <span class="text-amber-400 font-bold flex items-center"><i class="fa-solid fa-star mr-1"></i> ${p.rating}</span>
+              <span class="text-slate-300">•</span>
+              <span class="text-slate-500">${p.reviews} Ulasan Pembeli</span>
+              <span class="text-slate-300">•</span>
+              <span class="text-emerald-600 font-bold">Stok: ${p.stock} pcs</span>
+            </div>
+
+            <div class="flex items-baseline gap-3 my-4">
+              <span class="text-2xl font-black text-brand-red">Rp ${p.price.toLocaleString('id-ID')}</span>
+              <span class="text-sm text-slate-400 line-through">Rp ${p.originalPrice.toLocaleString('id-ID')}</span>
+            </div>
+
+            <p class="text-xs text-slate-600 leading-relaxed mb-6 bg-slate-50 p-3 rounded-xl border border-slate-100">
+              ${p.desc}
+            </p>
+          </div>
+
+          <div class="space-y-3">
+            <button onclick="addToCart(${p.id}); closeModal();" class="w-full bg-brand-red hover:bg-red-600 text-white font-bold py-3 rounded-xl text-sm shadow-md transition-colors flex items-center justify-center gap-2">
+              <i class="fa-solid fa-cart-plus"></i> Tambah Ke Keranjang
+            </button>
+            <button onclick="closeModal()" class="w-full bg-slate-100 text-slate-700 font-bold py-2.5 rounded-xl text-xs hover:bg-slate-200">
+              Tutup
+            </button>
+          </div>
+        </div>
+      `;
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('productModal').classList.add('hidden');
+    }
+
+    // CHECKOUT SIMULATION
+    function checkout() {
+      if (cart.length === 0) {
+        alert('Keranjang Anda masih kosong. Silahkan pilih produk terlebih dahulu.');
+        return;
+      }
+      alert('Terima kasih! Pesanan Anda di Toserba Anak QU berhasil dibuat. Tim kami akan segera memproses pesanan Anda.');
+      cart = [];
+      updateCartUI();
+      toggleCart();
+    }
+
+    // INITIAL RENDER
+    document.addEventListener('DOMContentLoaded', () => {
+      renderProducts(products);
+    });
+  </script>
+</body>
+</html>
+```
+
+Simpan kode di atas ke dalam file `index.html`. Halaman web ini sudah dapat langsung dibuka pada browser tanpa memerlukan pengaturan server khusus.
